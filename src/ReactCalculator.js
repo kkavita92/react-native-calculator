@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import {
+    Alert,
     View,
     Text,
+    TouchableHighlight,
     AppRegistry //Used to ensure JS execution environment is setup
 } from 'react-native';
 
@@ -17,6 +19,11 @@ const inputButtons = [
 
 class ReactCalculator extends Component {
 
+
+  _onInputButtonPressed(input) {
+    alert(input)
+  }
+
   render() {
     return ( //Creates container View that wraps two sections and takes full width and height
       <View style={Style.rootContainer}>
@@ -28,26 +35,30 @@ class ReactCalculator extends Component {
     )
   }
 
-  _renderInputButtons() {
-    let views = [];
+    _renderInputButtons() {
 
-    for (var r = 0; r < inputButtons.length; r ++) {
-        let row = inputButtons[r];
+      let views = [];
 
-        let inputRow = [];
-        for (var i = 0; i < row.length; i ++) {
-            let input = row[i];
+      for (var r = 0; r < inputButtons.length; r ++) {
+          let row = inputButtons[r];
 
-            inputRow.push(
-                <InputButton value={input} key={r + "-" + i} />
-            );
-        }
+          let inputRow = [];
+          for (var i = 0; i < row.length; i ++) {
+              let input = row[i];
 
-        views.push(<View style={Style.inputRow} key={"row-" + r}>{inputRow}</View>)
+              inputRow.push(
+                  <InputButton
+                    value={input}
+                    onPress={this._onInputButtonPressed.bind(this, input)}
+                    key={r + "-" + i} />
+              );
+          }
+
+          views.push(<View style={Style.inputRow} key={"row-" + r}>{inputRow}</View>)
+      }
+
+        return views;
     }
-
-    return views;
-}
 
 }
 
