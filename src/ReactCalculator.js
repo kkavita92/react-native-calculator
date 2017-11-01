@@ -19,6 +19,15 @@ const inputButtons = [
 
 class ReactCalculator extends Component {
 
+  constructor(props) { //constructor is only time you can modify state directly after which it is immutable
+    super(props); //passes it the super constructor
+
+    this.state = {
+      inputValue: 0
+    }
+
+  }
+
 
   _onInputButtonPressed(input) {
     alert(input)
@@ -27,7 +36,9 @@ class ReactCalculator extends Component {
   render() {
     return ( //Creates container View that wraps two sections and takes full width and height
       <View style={Style.rootContainer}>
-        <View style={Style.displayContainer}></View>
+        <View style={Style.displayContainer}>
+          <Text style={Style.displayText}>{this.state.inputValue}</Text>
+        </View>
         <View style={Style.inputContainer}>
           {this._renderInputButtons()}
         </View>
